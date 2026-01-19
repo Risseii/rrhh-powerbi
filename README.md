@@ -34,37 +34,41 @@ Para abordar estos desafíos, el análisis se estructura en torno a las siguient
 
 ## 4. 🛠️ TECNOLOGÍAS
 El proyecto integra un stack tecnológico para la gestión, transformación y visualización de datos:
--	Microsoft Power BI Desktop: Herramienta principal para modelado de datos, análisis y visualización interactiva.
--	Power Query (M): Lenguaje para transformaciones ETL y preparación de datos.
--	DAX (Data Analysis Expressions): 58 medidas calculadas para los indicadores.
+-	**Microsoft Power BI Desktop:** Herramienta principal para modelado de datos, análisis y visualización interactiva.
+-	**Power Query:** Lenguaje para transformaciones ETL y preparación de datos.
+-	**DAX (Data Analysis Expressions):** 58 medidas calculadas para los indicadores.
 
 ## 5. ⚙️ PROCESAMIENTO DE DATOS (ETL)
 El proceso ETL (Extract, Transform, Load) implementado garantiza la calidad, consistencia e integridad de los datos.
+
 **5.1 Extracción**
 Los datos se obtienen de sistemas fuente de recursos humanos, incluyendo información transaccional de empleados, evaluaciones de desempeño, registros de compensación y eventos de entrada/salida.
+
 **5.2 Transformación**
 -	Eliminación de registros duplicados y valores nulos.
 -	Normalización de campos categóricos (Gender, Attrition, OverTime).
 -	Creación de la dimensión de la tabla calendario.
 -	Creación de otras dimensiones.
 -	Creación de campo "Grupo de edad" mediante segmentación.
+  
 **5.3 Carga**
 Los datos transformados se cargan en el modelo semántico.
 
 ## 6. 🏗️ MODELADO DE DATOS
 El modelo implementa una arquitectura de estrella (Star Schema), considerada la mejor práctica en Business Intelligence por su simplicidad, rendimiento y facilidad de mantenimiento.
-**Tabla de Hechos: FactEmpleados**
--	Métricas cuantitativas: Ingresos, tasas, antigüedad, capacitaciones.
--	Atributos descriptivos: Género, estado civil, campo educativo.
--	Indicadores comportamentales: Horas extra, viajes, rotación.
--	Llaves foráneas: JobKey, DKey, KeyEnviro, YearsSinceLastPromotion.
+
+**Tabla de Hechos:**
+1. FactEmpleados
+
 **Tablas Dimensionales:**
 1.	DimDepartamento
 2.	DimJob
 3.	DimCalendario
 4.	Dim_WorkEnvironment
 5.	Dim_promotion
-**6.2 Relaciones del Modelo**
+
+**Relaciones del Modelo:**
+
 El modelo establece 5 relaciones 1:N activas con filtrado unidireccional.
 
 ## 7. 📊 INDICADORES CLAVE DE DESEMPEÑO
@@ -116,33 +120,43 @@ El modelo establece 5 relaciones 1:N activas con filtrado unidireccional.
 -	Empresas previas promedio
 
 ## 8. 💡 BUSINESS INSIGHTS
-1. **Estructura y distribución organizacional**
+
+**8.1 Estructura y distribución organizacional**
+
 La compañía cuenta con una fuerza laboral de 1,470 empleados, con una marcada especialización técnica.
--	Concentración por Departamento: El 65.4% (961 empleados) pertenece a Research & Development, seguido por Sales con el 30.3% (446 empleados).
--	Pirámide de Experiencia: La organización tiene una base joven, con más del 70% del personal en niveles Entry (543) y Junior (534).
--	Especialización: Predominan los perfiles en Life Sciences (606) y Medical (464).
-2. **Análisis de Rotación y fuga de talento**
+-	**Concentración por departamento:** El 65.4% (961 empleados) pertenece a Research & Development, seguido por Sales con el 30.3% (446 empleados).
+-	**Experiencia:** La organización tiene una base joven, con más del 70% del personal en niveles Entry (543) y Junior (534).
+-	**Especialización:** Predominan los perfiles en Life Sciences (606) y Medical (464).
+
+**8.2 Análisis de Rotación y fuga de talento**
+
 La rotación no es uniforme, sino que se concentra en roles críticos para la operación y las ventas.
--	Roles con mayor volumen de salidas: Laboratory Technician (62), Sales Executive (57) y Research Scientist (47).
--	Índices de rotación críticos: El puesto de Sales Representative lidera la deserción porcentual con un 39.8%, seguido por Laboratory Technician con 23.9%.
--	Rotación de nuevos talentos: El 34.9% de los empleados con menos de 2 años de antigüedad abandona la empresa. Este fenómeno es extremo en Human Resources (80%) y Sales Representative (56.7%).
-3. **Impacto Financiero de la Rotación**
+-	**Roles con mayor volumen de salidas:** Laboratory Technician (62), Sales Executive (57) y Research Scientist (47).
+-	**Índices de rotación críticos:** El puesto de Sales Representative lidera la deserción porcentual con un 39.8%, seguido por Laboratory Technician con 23.9%.
+-	**Rotación de nuevos talentos:** El 34.9% de los empleados con menos de 2 años de antigüedad abandona la empresa. Este fenómeno es extremo en Human Resources (80%) y Sales Representative (56.7%).
+
+**8.3 Impacto Financiero de la Rotación**
+
 La pérdida económica por la salida de personal es un factor crítico para la rentabilidad.
--	Costo total estimado: La rotación le cuesta a la empresa $2,311,792.07.
--	Por Puesto:
+-	**Costo total estimado:** La rotación le cuesta a la empresa $2,311,792.07.
+-	**Por Puesto:**
 o	Sales Executive: Es el rol más costoso financieramente con $592,025.87 en pérdidas.
 o	Laboratory Technician: Representa un impacto de $301,056.80.
--	Inversión en Capacitación: A pesar de haber realizado 4,115 capacitaciones (cubriendo al 96.3% del personal), la alta rotación indica que la empresa está perdiendo el retorno de inversión en formación.
-4. **Factores de riesgo y clima laboral**
+-	**Inversión en capacitación:** A pesar de haber realizado 4,115 capacitaciones (cubriendo al 96.3% del personal), la alta rotación indica que la empresa está perdiendo el retorno de inversión en formación.
+
+**8.4 Factores de riesgo y clima laboral**
+
 El 58.3% de los empleados se clasifica en situación de Riesgo Clave (debido a horas extra, nivel Entry o baja antigüedad).
--	Sobrecarga de Trabajo: El 28.3% del personal realiza horas extras. En Research Scientist, esta cifra sube al 33.2%.
--	Riesgo por Puesto: Sales Representative tiene un nivel de riesgo alarmante del 96.4%, seguido por Research Scientist con un 87.7%.
--	Índice de Bienestar: Se sitúa en 68.79/100, por debajo del umbral saludable de 70, lo que confirma una insatisfacción latente.
--	Liderazgo: Existe una fuerte insatisfacción con el jefe en Sales Representative (44.6%), lo cual correlaciona directamente con su alta rotación.
-5. **Compensación y desarrollo de Carrera**
--	Equidad de Género: A nivel general, las mujeres ganan un 5% más que los hombres.
--	Brecha Salarial en Dirección: Se detectó una brecha crítica en el puesto de Research Director, donde los hombres ganan un mediano de $17,584 vs. $14,275 de las mujeres (diferencia de $3,309).
--	Estancamiento (Cuello de Botella): Los Managers promedian 4.8 años sin una promoción, lo que bloquea el crecimiento de los niveles Junior y Entry.
+-	**Sobrecarga de Trabajo:** El 28.3% del personal realiza horas extras. En Research Scientist, esta cifra sube al 33.2%.
+-	**Riesgo por Puesto:** Sales Representative tiene un nivel de riesgo alarmante del 96.4%, seguido por Research Scientist con un 87.7%.
+-	**Índice de Bienestar:** Se sitúa en 68.79/100, por debajo del umbral saludable de 70, lo que confirma una insatisfacción latente.
+-	**Liderazgo:** Existe una fuerte insatisfacción con el jefe en Sales Representative (44.6%), lo cual correlaciona directamente con su alta rotación.
+
+**8.5 Compensación y desarrollo de Carrera**
+
+-	**Equidad de Género:** A nivel general, las mujeres ganan un 5% más que los hombres.
+-	**Brecha salarial en dirección:** Se detectó una brecha crítica en el puesto de Research Director, donde los hombres ganan un mediano de $17,584 vs. $14,275 de las mujeres (diferencia de $3,309).
+-	**Estancamiento (Cuello de botella):** Los Managers promedian 4.8 años sin una promoción, lo que bloquea el crecimiento de los niveles Junior y Entry.
 
 ## 9. 🖼️ VISTA DEL DASHBOARD
 <img width="2103" height="1200" alt="Resumen de RRHH" src="https://github.com/user-attachments/assets/7cf39ce1-26bd-49b0-84ef-27b4f3cf946e" />
